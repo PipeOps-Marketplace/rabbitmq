@@ -6,5 +6,9 @@ RUN rabbitmq-plugins enable --offline rabbitmq_mqtt rabbitmq_federation_manageme
 
 COPY rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
 
-COPY rabbitmq-ssl-init.sh /usr/local/bin/
+# Copy cert gen script and entrypoint
+COPY rabbitmq-ssl-init.sh /usr/local/bin/rabbitmq-ssl-init.sh
 RUN chmod +x /usr/local/bin/rabbitmq-ssl-init.sh && /usr/local/bin/rabbitmq-ssl-init.sh
+
+# Use your entry point instead of the default
+ENTRYPOINT ["/usr/local/bin/rabbitmq-ssl-init.sh"]
