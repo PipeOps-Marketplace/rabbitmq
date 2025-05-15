@@ -9,6 +9,4 @@ COPY rabbitmq.conf /etc/rabbitmq/rabbitmq.conf
 # Copy cert gen script and entrypoint
 COPY rabbitmq-ssl-init.sh /usr/local/bin/rabbitmq-ssl-init.sh
 RUN chmod +x /usr/local/bin/rabbitmq-ssl-init.sh && /usr/local/bin/rabbitmq-ssl-init.sh
-
-# Use your entry point instead of the default
-ENTRYPOINT ["/usr/local/bin/rabbitmq-ssl-init.sh"]
+RUN /usr/local/bin/rabbitmq-ssl-init.sh
